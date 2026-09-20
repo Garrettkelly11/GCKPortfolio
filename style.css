@@ -243,6 +243,157 @@ a:hover { color: var(--parchment); }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--accent); }
 
+/* --- Project pages -------------------------------------------------------- */
+
+.subhead {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: -0.25rem 0 1.25rem;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  max-width: none;
+}
+
+.tags li {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+/* Pull-quoted rules text, set like it would appear in the book */
+.rule {
+  background: var(--panel);
+  border-left: 2px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  max-width: var(--measure);
+}
+
+.rule h4 {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.rule p { margin-bottom: 0.6em; }
+.rule p:last-child { margin-bottom: 0; }
+.rule ul { margin: 0.4em 0 0; padding-left: 1.1rem; }
+
+/* --- Figures & exhibits --------------------------------------------------- */
+
+figure { margin: 1.75rem 0; }
+
+figcaption {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  max-width: var(--measure);
+}
+
+/* A document scan sits on its own paper, not on the dark page */
+.paper {
+  background: #f6f3ec;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.75rem;
+}
+
+.paper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Heatmap (Shrynks success rates) -------------------------------------- */
+
+.scroll-x {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+table.heatmap {
+  border-collapse: separate;
+  border-spacing: 2px;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+table.heatmap caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding-bottom: 0.6rem;
+}
+
+table.heatmap th {
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.2rem 0.35rem;
+  white-space: nowrap;
+}
+
+table.heatmap th[scope="row"] { text-align: right; }
+
+table.heatmap td {
+  width: 2.7rem;
+  padding: 0.35rem 0.2rem;
+  text-align: center;
+  border-radius: 2px;
+  background: #1b1712;
+  color: var(--parchment);
+}
+
+table.heatmap td.hot { color: #171310; }
+
+table.heatmap td:hover {
+  outline: 2px solid var(--parchment);
+  outline-offset: -2px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.legend .swatches { display: flex; gap: 2px; }
+
+.legend .swatches span {
+  width: 1.6rem;
+  height: 0.7rem;
+  border-radius: 1px;
+}
+
 /* --- Utilities ------------------------------------------------------------ */
 
 .skip-link {

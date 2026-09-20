@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shrynks — Garrett Kelly</title>
+<meta name="description" content="Shrynks: a modern punk RPG about psychics, built on a d6 pool with a surge-conversion rule and tested by simulation. Design work by Garrett Kelly.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Garrett Kelly</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="work.html" aria-current="page">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section class="hero">
+      <p class="eyebrow">Tabletop RPG &middot; In development</p>
+      <h1>Shrynks</h1>
+      <p class="subhead">Designer, systems &amp; balance &middot; 2026</p>
+      <p class="lede">A modern punk RPG about psychics, built on a dice pool I could test instead of
+        guess at.</p>
+      <ul class="tags">
+        <li>Systems design</li>
+        <li>Probability modeling</li>
+        <li>Python</li>
+        <li>Worldbuilding</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="premise">
+      <h2 id="premise">The premise</h2>
+      <p>A psychic cataclysm cracked the world and shrynks emerged from it. What caused the
+        cataclysm is deliberately undefined — the rules present competing in-world theories and
+        never confirm one, because finding out can be the goal of an entire campaign.</p>
+      <p>Shrynks are persona non grata: imprisoned, exploited, and hunted by a worldwide theocratic
+        order. Three powers hold the map — <strong>St. Iver</strong>, a church-city spanning what
+        was the American eastern seaboard; <strong>Drexlin</strong>, the bureaucratic and
+        surveillance heart of global society; and a liberated Oceania that shelters shrynks and has
+        frontier problems of its own.</p>
+      <p>The tone runs from gritty and paranoid to pulpy, but everything passes through a cerebral,
+        slightly-wrong lens. Even at its loudest it should feel like reality has a seam in it.</p>
+    </section>
+
+    <section class="section" aria-labelledby="theme">
+      <h2 id="theme">The design problem</h2>
+      <p>The theme is <strong>identity and control</strong>: what your power does to your sense of
+        self, and who you become when you use it. So the mechanics had to make power growth and
+        identity loss <em>the same axis</em> — push harder, get stronger and stranger, slide toward
+        becoming a Psychic Aberration. Pressure builds, erupts as Fallout, and drags you a little
+        further from yourself.</p>
+      <p>That constraint rules out a lot. Any subsystem that lets a player get more powerful without
+        paying in self is off the table, which is a useful thing to know before writing a single
+        power.</p>
+      <p>Thirteen <strong>Strains</strong> — Telepathy, Telekinesis, Precog, Firestarter,
+        Psychometry, Moulder, Blank, Projector, Echoes, Slink, Guidance, Charade, Elevation — each
+        key to an Attribute plus a Skill rather than to a spell list, so a shrynk's flavor of power
+        is expressed through what they were already good at.</p>
+    </section>
+
+    <section class="section" aria-labelledby="dice">
+      <h2 id="dice">The dice, and testing them</h2>
+
+      <div class="rule">
+        <h4>The resolution rule</h4>
+        <p>Roll a pool of d6s against a difficulty class.</p>
+        <ul>
+          <li><strong>6</strong> — a Surge</li>
+          <li><strong>4–5</strong> — a Hit</li>
+          <li><strong>1–3</strong> — nothing</li>
+        </ul>
+        <p>Every <em>pair</em> of Surges converts into a crit worth 4 toward your score; an odd
+          Surge left over counts as 1. Score = Hits + Surge value. Meet the DC and you succeed;
+          succeed with two or more Surges and it's a <strong>Surge Success</strong>.</p>
+      </div>
+
+      <p>The pair-conversion is the interesting part and the risky part. It means the curve isn't
+        linear — a pool that rolls hot doesn't just succeed, it leaps. Which is exactly the feel I
+        wanted for psychic power, and exactly the kind of rule that quietly breaks a difficulty
+        scale if nobody checks.</p>
+      <p>So I wrote a simulator: a Monte Carlo run over every difficulty and pool size in the design
+        range, a million trials each, printing a success-rate grid.</p>
+
+      <figure>
+        <div class="scroll-x">
+          <table class="heatmap" id="rates">
+            <caption>Success rate by difficulty class and dice pool. Hover any cell for the exact
+              figure.</caption>
+          </table>
+        </div>
+        <div class="legend">
+          <span>Success rate</span>
+          <span class="swatches" aria-hidden="true">
+            <span style="background:#141110"></span>
+            <span style="background:#2b2114"></span>
+            <span style="background:#46341a"></span>
+            <span style="background:#6b4d1e"></span>
+            <span style="background:#a37722"></span>
+            <span style="background:#c08f2c"></span>
+            <span style="background:#e8b45a"></span>
+          </span>
+          <span>0 &middot; under 1% &middot; 1–5 &middot; 5–20 &middot; 20–45 &middot; 45–75 &middot; 75–100%</span>
+        </div>
+        <figcaption>
+          Every figure in the grid is printed as well as shaded, and the shading bands are uneven on
+          purpose — the interesting behavior is crowded into the low percentages.
+        </figcaption>
+      </figure>
+
+      <p>Two things fell out of it. The first is a usable difficulty scale. A five-die pool — a
+        plausible starting character — clears DC 3 about half the time (53.5%), drops to roughly one
+        attempt in six at DC 5 (17.6%), and is effectively walled off by DC 7 (1.9%). That gives me
+        somewhere real to anchor "routine," "hard," and "don't," instead of picking numbers because
+        they sounded right.</p>
+
+      <div class="rule">
+        <h4>The second thing was a hole</h4>
+        <p>At every even pool size, one score is unreachable. A pool of six can produce a 12 — six
+          Surges, three crits — and it can produce a 10, but it can never produce an 11. The
+          conversion jumps over it. Same gap at four dice (no 7) and at eight (no 15).</p>
+        <p>It only bites at the very top of a pool's range, where the odds are already vanishing, so
+          it may not be worth fixing. But it's the kind of thing that should be a decision rather
+          than a surprise, and I wouldn't have found it by reading the rule.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="status">
+      <h2 id="status">Where it stands</h2>
+      <dl class="facts">
+        <dt>Built</dt>
+        <dd>Resolution mechanic and balance simulator, Strain list, attribute and skill structure,
+          character sheet, rulebook chapter outline</dd>
+        <dt>Next</dt>
+        <dd>The Pressure / Burn / Fallout subsystem — the escalating spiral is the game's whole
+          thesis and it's the part still undesigned</dd>
+        <dt>Open question</dt>
+        <dd>Whether the surge-conversion curve stays fun once players can grow their pools, or
+          whether it needs a ceiling</dd>
+      </dl>
+      <p><a href="work.html">&larr; Back to work</a></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Garrett Kelly</span>
+    <span><a href="contact.html">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+// Success rates (%) for the Shrynks pool rule: rows DC 1-15, columns DP 1-14.
+const RATES = [[50.0,75.0,87.5,93.7,96.9,98.4,99.2,99.6,99.8,99.9,100.0,100.0,100.0,100.0],[0.0,25.0,50.0,68.7,81.2,89.1,93.7,96.5,98.0,98.9,99.4,99.7,99.8,99.9],[0.0,2.8,16.7,35.4,53.5,68.2,79.2,86.8,91.8,95.0,97.0,98.3,99.0,99.4],[0.0,2.8,7.4,16.9,30.3,45.1,58.9,70.6,79.6,86.3,91.1,94.3,96.4,97.8],[0.0,0.0,3.2,9.0,17.6,28.6,40.9,53.1,64.3,73.7,81.2,86.9,91.1,94.1],[0.0,0.0,0.0,2.5,8.1,16.2,26.2,37.4,48.7,59.3,68.7,76.6,83.0,87.9],[0.0,0.0,0.0,0.1,1.9,6.4,13.5,22.7,33.2,44.0,54.4,63.9,72.2,79.0],[0.0,0.0,0.0,0.1,0.3,1.7,5.2,11.1,19.2,28.8,39.1,49.3,58.9,67.5],[0.0,0.0,0.0,0.0,0.1,0.6,1.9,4.7,9.5,16.4,24.9,34.4,44.2,53.8],[0.0,0.0,0.0,0.0,0.0,0.2,0.7,2.0,4.4,8.6,14.4,21.9,30.5,39.7],[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.7,1.9,4.1,7.7,12.9,19.5,27.2],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.6,1.7,3.7,6.9,11.5,17.4],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.6,1.5,3.3,6.1,10.1],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.5,1.4,2.9,5.4],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.5,1.3,2.6]];
+
+const STEPS = [
+  { max: 0,   bg: '#141110', hot: false },
+  { max: 1,   bg: '#2b2114', hot: false },
+  { max: 5,   bg: '#46341a', hot: false },
+  { max: 20,  bg: '#6b4d1e', hot: false },
+  { max: 45,  bg: '#a37722', hot: true  },
+  { max: 75,  bg: '#c08f2c', hot: true  },
+  { max: 101, bg: '#e8b45a', hot: true  }
+];
+
+function step(v) {
+  for (const s of STEPS) { if (v <= s.max) return s; }
+  return STEPS[STEPS.length - 1];
+}
+
+(function buildHeatmap() {
+  const table = document.getElementById('rates');
+  if (!table) return;
+
+  const head = document.createElement('thead');
+  const hrow = document.createElement('tr');
+  const corner = document.createElement('th');
+  corner.scope = 'col';
+  corner.textContent = 'DC \\ pool';
+  hrow.appendChild(corner);
+  for (let dp = 1; dp <= 14; dp++) {
+    const th = document.createElement('th');
+    th.scope = 'col';
+    th.textContent = dp;
+    hrow.appendChild(th);
+  }
+  head.appendChild(hrow);
+  table.appendChild(head);
+
+  const body = document.createElement('tbody');
+  RATES.forEach(function (row, i) {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = 'DC ' + (i + 1);
+    tr.appendChild(th);
+    row.forEach(function (v, j) {
+      const dc = i + 1, dp = j + 1;
+      // Highest score a pool of dp dice can reach: every pair of Surges is worth 4, an odd one 1.
+      const ceiling = 4 * Math.floor(dp / 2) + (dp % 2);
+      const impossible = dc > ceiling;
+      const td = document.createElement('td');
+      const s = step(v);
+      td.style.background = s.bg;
+      if (s.hot) td.className = 'hot';
+      if (v === 0) td.style.color = '#a1978a';
+      td.textContent = v === 0 ? '—' : v.toFixed(1);
+      td.title = impossible
+        ? 'Impossible — ' + dp + 'd6 cannot score above ' + ceiling
+        : (v === 0 ? 'Under 0.05%' : v.toFixed(1) + '%') +
+          ' success — DC ' + dc + ', pool of ' + dp + 'd6';
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  });
+  table.appendChild(body);
+})();
+</script>
+
+</body>
+</html>
