@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shrynks — Garrett Kelly</title>
-<meta name="description" content="Shrynks: a modern punk RPG about psychics, built on a d6 pool with a surge-conversion rule and tested by simulation. Design work by Garrett Kelly.">
+<meta name="description" content="Shrynks: a modern punk RPG about psychics, built on a d6 pool tested by simulation.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,75 +29,51 @@
     <section class="hero">
       <p class="eyebrow">Tabletop RPG &middot; In development</p>
       <h1>Shrynks</h1>
-      <p class="subhead">Designer, systems &amp; balance &middot; 2026</p>
-      <p class="lede">A modern punk RPG about psychics, built on a dice pool I could test instead of
-        guess at.</p>
+      <p class="subhead">Designer, systems and balance &middot; 2026</p>
+      <p class="lede">A modern punk RPG about psychics.</p>
       <ul class="tags">
         <li>Systems design</li>
-        <li>Probability modeling</li>
+        <li>Probability</li>
         <li>Python</li>
         <li>Worldbuilding</li>
       </ul>
     </section>
 
     <section class="section" aria-labelledby="premise">
-      <h2 id="premise">The premise</h2>
-      <p>A psychic cataclysm cracked the world and shrynks emerged from it. What caused the
-        cataclysm is deliberately undefined — the rules present competing in-world theories and
-        never confirm one, because finding out can be the goal of an entire campaign.</p>
-      <p>Shrynks are persona non grata: imprisoned, exploited, and hunted by a worldwide theocratic
-        order. Three powers hold the map — <strong>St. Iver</strong>, a church-city spanning what
-        was the American eastern seaboard; <strong>Drexlin</strong>, the bureaucratic and
-        surveillance heart of global society; and a liberated Oceania that shelters shrynks and has
-        frontier problems of its own.</p>
-      <p>The tone runs from gritty and paranoid to pulpy, but everything passes through a cerebral,
-        slightly-wrong lens. Even at its loudest it should feel like reality has a seam in it.</p>
+      <h2 id="premise">Premise</h2>
+      <p>A psychic cataclysm cracked the world and shrynks came out of it. The cause is never
+        confirmed, only argued over in-world, because finding out can be a campaign.</p>
+      <p>Shrynks are hunted. St. Iver is a church-city covering the old eastern seaboard, Drexlin
+        runs the surveillance, and a liberated Oceania takes in whoever makes it there.</p>
+      <p>Thirteen Strains, from Telepathy to Firestarter to Blank, each keyed to an attribute plus a
+        skill rather than a spell list.</p>
     </section>
 
     <section class="section" aria-labelledby="theme">
-      <h2 id="theme">The design problem</h2>
-      <p>The theme is <strong>identity and control</strong>: what your power does to your sense of
-        self, and who you become when you use it. So the mechanics had to make power growth and
-        identity loss <em>the same axis</em> — push harder, get stronger and stranger, slide toward
-        becoming a Psychic Aberration. Pressure builds, erupts as Fallout, and drags you a little
-        further from yourself.</p>
-      <p>That constraint rules out a lot. Any subsystem that lets a player get more powerful without
-        paying in self is off the table, which is a useful thing to know before writing a single
-        power.</p>
-      <p>Thirteen <strong>Strains</strong> — Telepathy, Telekinesis, Precog, Firestarter,
-        Psychometry, Moulder, Blank, Projector, Echoes, Slink, Guidance, Charade, Elevation — each
-        key to an Attribute plus a Skill rather than to a spell list, so a shrynk's flavor of power
-        is expressed through what they were already good at.</p>
+      <h2 id="theme">The constraint</h2>
+      <p>The theme is identity and control. Power growth and identity loss are the same axis: push
+        harder, get stronger and stranger, slide toward becoming an Aberration. Anything that makes
+        a character more powerful without costing them self is out.</p>
     </section>
 
     <section class="section" aria-labelledby="dice">
-      <h2 id="dice">The dice, and testing them</h2>
+      <h2 id="dice">The dice</h2>
 
       <div class="rule">
-        <h4>The resolution rule</h4>
-        <p>Roll a pool of d6s against a difficulty class.</p>
-        <ul>
-          <li><strong>6</strong> — a Surge</li>
-          <li><strong>4–5</strong> — a Hit</li>
-          <li><strong>1–3</strong> — nothing</li>
-        </ul>
-        <p>Every <em>pair</em> of Surges converts into a crit worth 4 toward your score; an odd
-          Surge left over counts as 1. Score = Hits + Surge value. Meet the DC and you succeed;
-          succeed with two or more Surges and it's a <strong>Surge Success</strong>.</p>
+        <h4>Resolution</h4>
+        <p>Roll a pool of d6s against a DC. A 6 is a Surge, 4&ndash;5 is a Hit, the rest is nothing.
+          Each pair of Surges converts to a crit worth 4; an odd Surge counts 1. Score = Hits +
+          Surge value. Two or more Surges on a success makes it a Surge Success.</p>
       </div>
 
-      <p>The pair-conversion is the interesting part and the risky part. It means the curve isn't
-        linear — a pool that rolls hot doesn't just succeed, it leaps. Which is exactly the feel I
-        wanted for psychic power, and exactly the kind of rule that quietly breaks a difficulty
-        scale if nobody checks.</p>
-      <p>So I wrote a simulator: a Monte Carlo run over every difficulty and pool size in the design
-        range, a million trials each, printing a success-rate grid.</p>
+      <p>The pair conversion makes the curve jump instead of climb. That's the feel I wanted and
+        also the part most likely to break a difficulty scale, so I wrote a simulator to map every
+        DC against every pool size.</p>
 
       <figure>
         <div class="scroll-x">
           <table class="heatmap" id="rates">
-            <caption>Success rate by difficulty class and dice pool. Hover any cell for the exact
-              figure.</caption>
+            <caption>Success rate by DC and pool size. Hover a cell for detail.</caption>
           </table>
         </div>
         <div class="legend">
@@ -113,43 +89,31 @@
           </span>
           <span>0 &middot; under 1% &middot; 1–5 &middot; 5–20 &middot; 20–45 &middot; 45–75 &middot; 75–100%</span>
         </div>
-        <figcaption>
-          Every figure in the grid is printed as well as shaded, and the shading bands are uneven on
-          purpose — the interesting behavior is crowded into the low percentages.
-        </figcaption>
       </figure>
 
-      <p>Two things fell out of it. The first is a usable difficulty scale. A five-die pool — a
-        plausible starting character — clears DC 3 about half the time (53.5%), drops to roughly one
-        attempt in six at DC 5 (17.6%), and is effectively walled off by DC 7 (1.9%). That gives me
-        somewhere real to anchor "routine," "hard," and "don't," instead of picking numbers because
-        they sounded right.</p>
+      <p>Five dice clears DC 3 about half the time, DC 5 about one try in six, and DC 7 almost
+        never. That sets the difficulty scale.</p>
 
       <div class="rule">
-        <h4>The second thing was a hole</h4>
-        <p>At every even pool size, one score is unreachable. A pool of six can produce a 12 — six
-          Surges, three crits — and it can produce a 10, but it can never produce an 11. The
-          conversion jumps over it. Same gap at four dice (no 7) and at eight (no 15).</p>
-        <p>It only bites at the very top of a pool's range, where the odds are already vanishing, so
-          it may not be worth fixing. But it's the kind of thing that should be a decision rather
-          than a surprise, and I wouldn't have found it by reading the rule.</p>
+        <h4>And a hole</h4>
+        <p>At even pool sizes one score is unreachable. Six dice can hit 12 and can hit 10, but
+          never 11. Four dice skip 7, eight dice skip 15. It only matters at the top of a pool's
+          range where the odds are already tiny, but I'd rather decide about it than find out later.</p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="status">
-      <h2 id="status">Where it stands</h2>
+      <h2 id="status">Status</h2>
       <dl class="facts">
-        <dt>Built</dt>
-        <dd>Resolution mechanic and balance simulator, Strain list, attribute and skill structure,
-          character sheet, rulebook chapter outline</dd>
+        <dt>Done</dt>
+        <dd>Resolution mechanic, balance simulator, Strains, attributes and skills, character sheet,
+          rulebook outline</dd>
         <dt>Next</dt>
-        <dd>The Pressure / Burn / Fallout subsystem — the escalating spiral is the game's whole
-          thesis and it's the part still undesigned</dd>
-        <dt>Open question</dt>
-        <dd>Whether the surge-conversion curve stays fun once players can grow their pools, or
-          whether it needs a ceiling</dd>
+        <dd>Pressure, Burn and Fallout, the part carrying the whole theme</dd>
+        <dt>Open</dt>
+        <dd>Whether the curve holds up once pools grow</dd>
       </dl>
-      <p><a href="work.html">&larr; Back to work</a></p>
+      <p><a href="work.html">&larr; Work</a></p>
     </section>
 
   </div>
@@ -163,7 +127,7 @@
 </footer>
 
 <script>
-// Success rates (%) for the Shrynks pool rule: rows DC 1-15, columns DP 1-14.
+// Success rates (%) for the Shrynks pool rule: rows DC 1-15, columns pool 1-14.
 const RATES = [[50.0,75.0,87.5,93.7,96.9,98.4,99.2,99.6,99.8,99.9,100.0,100.0,100.0,100.0],[0.0,25.0,50.0,68.7,81.2,89.1,93.7,96.5,98.0,98.9,99.4,99.7,99.8,99.9],[0.0,2.8,16.7,35.4,53.5,68.2,79.2,86.8,91.8,95.0,97.0,98.3,99.0,99.4],[0.0,2.8,7.4,16.9,30.3,45.1,58.9,70.6,79.6,86.3,91.1,94.3,96.4,97.8],[0.0,0.0,3.2,9.0,17.6,28.6,40.9,53.1,64.3,73.7,81.2,86.9,91.1,94.1],[0.0,0.0,0.0,2.5,8.1,16.2,26.2,37.4,48.7,59.3,68.7,76.6,83.0,87.9],[0.0,0.0,0.0,0.1,1.9,6.4,13.5,22.7,33.2,44.0,54.4,63.9,72.2,79.0],[0.0,0.0,0.0,0.1,0.3,1.7,5.2,11.1,19.2,28.8,39.1,49.3,58.9,67.5],[0.0,0.0,0.0,0.0,0.1,0.6,1.9,4.7,9.5,16.4,24.9,34.4,44.2,53.8],[0.0,0.0,0.0,0.0,0.0,0.2,0.7,2.0,4.4,8.6,14.4,21.9,30.5,39.7],[0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.7,1.9,4.1,7.7,12.9,19.5,27.2],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.6,1.7,3.7,6.9,11.5,17.4],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.6,1.5,3.3,6.1,10.1],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.5,1.4,2.9,5.4],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.5,1.3,2.6]];
 
 const STEPS = [
@@ -209,7 +173,7 @@ function step(v) {
     tr.appendChild(th);
     row.forEach(function (v, j) {
       const dc = i + 1, dp = j + 1;
-      // Highest score a pool of dp dice can reach: every pair of Surges is worth 4, an odd one 1.
+      // Highest score dp dice can reach: every pair of Surges is worth 4, an odd one 1.
       const ceiling = 4 * Math.floor(dp / 2) + (dp % 2);
       const impossible = dc > ceiling;
       const td = document.createElement('td');
